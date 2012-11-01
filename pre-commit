@@ -1,0 +1,26 @@
+#!/bin/sh
+
+#Repo root 
+GIT_ROOT="$(pwd)"
+
+#CSS directory 
+CSS_DIR="styles/"
+
+#If builds directory doesn't exist make it
+if [ ! -d "$CSS_DIR/builds" ]; then
+    cd $CSS_DIR
+    mkdir builds
+    cd $GIT_ROOT
+fi
+
+#Build location for concat CSS and then used again for the minified CSS
+CSS_BUILD_FILE="$CSS_DIR/builds/style-min.css"
+
+#concat the CSS
+cat $CSS_DIR*.css > $CSS_BUILD_FILE
+
+#Now minify the concat file
+java -jar ~/bin/yuicompressor.jar $CSS_BUILD_FILE -o $CSS_BUILD_FILE
+
+#Add the new build file to git so it will be included in the commit
+git add -A
