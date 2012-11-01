@@ -1,5 +1,5 @@
-css-build-hook
-==============
+Pre-commit hook to concatenate and minify CSS
+=============================================
 
 A basic git pre-commit hook to concatenate and minify all css and save to a new location so you still have a working copy.
 
